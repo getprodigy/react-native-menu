@@ -185,13 +185,13 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
 
     render() {
       return (
-        <View ref="Container" onLayout={this.onLayout} style={{ flex: 1 }}>
-          <View style={this.props.style}>
+        <View accessible={false} testID="MenuContext" ref="Container" onLayout={this.onLayout} style={{ flex: 1 }}>
+          <View accessible={false} testID="MenuContextChildren" style={this.props.style}>
             { this.props.children }
           </View>
           <TouchableWithoutFeedback onPress={this.closeMenu}>
             <View style={[ styles.backdrop
-                          , this.state.openedMenu ? { width: this.state.backdropWidth, top: 0, bottom: 0 }: null ]}/>
+              , this.state.openedMenu ? { width: this.state.backdropWidth, top: 0, bottom: 0 }: null ]}/>
           </TouchableWithoutFeedback>
           { this.state.menuOptions }
         </View>
