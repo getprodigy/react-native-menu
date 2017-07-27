@@ -6,11 +6,9 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
   const {
     UIManager,
     TouchableWithoutFeedback,
-    ScrollView,
     View,
-    BackAndroid
+    BackAndroid,
   } = ReactNative;
-  const AnimatedOptionsContainer = require('./makeAnimatedOptionsContainer')(React, ReactNative);
 
   // Calls a function once, then never again.
   const once = (fn) => {
@@ -23,25 +21,19 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
     };
   };
 
-  const defaultOptionsContainerRenderer = (options) => (
-    <ScrollView>
-      {options}
-    </ScrollView>
-  );
-
   const makeOptions = (options, { top, right }) => {
-    const { optionsContainerStyle, renderOptionsContainer = defaultOptionsContainerRenderer} = options.props;
+    const { optionsContainerStyle } = options.props;
     return (
-      <AnimatedOptionsContainer style={[ styles.optionsContainer, optionsContainerStyle, { top, right }]}>
-        { renderOptionsContainer(options) }
-      </AnimatedOptionsContainer>
+      <View style={[ styles.optionsContainer, optionsContainerStyle, { top, right }]}>
+        {options}
+      </View>
     );
   };
 
   const NULL_HOOKS = {
     didOpen: () => {},
     didClose: () => {}
-  }
+  };
 
   /*
    * The MenuContext provides a tunnel for descendant menu components to access
@@ -159,8 +151,12 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
       delete this._options[name];
     },
     _registerOptionsElement(name, options) {
-      // If options are already set and visible, skip the update.
       if (this.state.menuOptions === options) {
+        return;
+      }
+      if (this.state.menuOptions
+        && this.state.menuOptions.props.children
+        && this.state.menuOptions.props.children.props.children === options.props.children) {
         return;
       }
       this._options[name] = options;

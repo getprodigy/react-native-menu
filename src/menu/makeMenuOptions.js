@@ -1,5 +1,5 @@
 module.exports = (React, ReactNative, { styles }) => {
-  const { TouchableWithoutFeedback, View } = ReactNative;
+  const { TouchableWithoutFeedback, View, ListView } = ReactNative;
 
   const MenuOptions = React.createClass({
     displayName: 'MenuOptions',
@@ -7,13 +7,22 @@ module.exports = (React, ReactNative, { styles }) => {
       this.props.onSelect(value);
     },
     render() {
+      const childrenMap = {};
+      (this.props.children || []).forEach(v => {
+        childrenMap[v.key] = v;
+      });
+      const dataSource = new ListView
+        .DataSource({ rowHasChanged: (r1, r2) => false })
+        .cloneWithRows(this.props.children.map(v => v.key));
       return (
-        <TouchableWithoutFeedback accessible={false} testID="MenuOptionsContainer" style={[styles.options, this.props.style]}>
-          <View>
-            { React.Children.map(this.props.children, (x) => (
-              React.cloneElement(x, {onPress: this.onSelect})
-            )) }
-          </View>
+        <TouchableWithoutFeedback
+          accessible={false}
+          testID="MenuOptionsContainer"
+          style={[styles.options, this.props.style]}>
+          <ListView
+            dataSource={dataSource}
+            renderRow={v => React.cloneElement(childrenMap[v], { onPress: this.onSelect })}
+          />
         </TouchableWithoutFeedback>
       );
     }
