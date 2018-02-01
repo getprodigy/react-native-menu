@@ -1,4 +1,5 @@
 const TimerMixin = require('react-timer-mixin');
+const PropTypes = require('proptypes');
 
 let nextID = 1;
 
@@ -43,7 +44,7 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
   const MenuContext = React.createClass({
     displayName: 'MenuContext',
     propTypes: {
-      detectBackAndroid: React.PropTypes.bool,
+      detectBackAndroid: PropTypes.bool,
     },
     getDefaultProps() {
       return {
