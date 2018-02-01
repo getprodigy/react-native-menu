@@ -1,5 +1,5 @@
 const TimerMixin = require('react-timer-mixin');
-const PropTypes = require('proptypes');
+const PropTypes = require('prop-types');
 
 module.exports = (React, ReactNative, { constants, model, styles }) => {
   const {

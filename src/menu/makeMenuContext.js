@@ -1,5 +1,5 @@
 const TimerMixin = require('react-timer-mixin');
-const PropTypes = require('proptypes');
+const PropTypes = require('prop-types');
 
 let nextID = 1;
 

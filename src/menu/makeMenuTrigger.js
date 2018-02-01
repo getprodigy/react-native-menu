@@ -1,4 +1,4 @@
-const PropTypes = require('proptypes');
+const PropTypes = require('prop-types');
 
 module.exports = (React, ReactNative, { model }) => {
   const { TouchableWithoutFeedback, View } = ReactNative;

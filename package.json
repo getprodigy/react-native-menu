@@ -54,7 +54,7 @@
     "wd": "^0.4.0"
   },
   "dependencies": {
-    "proptypes": "1.1.0",
+    "prop-types": "15.6.0",
     "react-timer-mixin": "^0.13.3"
   }
 }
