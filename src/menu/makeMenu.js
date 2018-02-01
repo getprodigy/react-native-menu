@@ -1,3 +1,4 @@
+const createClass = require('create-react-class');
 const TimerMixin = require('react-timer-mixin');
 const PropTypes = require('prop-types');
 
@@ -7,7 +8,7 @@ module.exports = (React, ReactNative, { constants, model, styles }) => {
     View
   } = ReactNative;
 
-  const Menu = React.createClass({
+  const Menu = createClass({
     displayName: 'Menu',
     propTypes: {
       name: PropTypes.string,

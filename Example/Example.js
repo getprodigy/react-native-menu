@@ -1,5 +1,6 @@
 'use strict';
 
+const createClass = require('create-react-class');
 const React = require('react');
 const ReactNative = require('react-native');
 const {
@@ -16,7 +17,7 @@ import Menu, {
   MenuTrigger
 } from 'react-native-menu';
 
-const Example = React.createClass({
+const Example = createClass({
   componentDidMount() {
     // We can use the public context API to open/close/toggle the menu.
     //setInterval(() => {
